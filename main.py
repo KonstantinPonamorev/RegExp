@@ -27,9 +27,11 @@ def structure_names():
     return contacts_list
 
 def subs_phones():
-    pattern = r"(8|\+7)?\D*(495)\S*(-|\s)*(\d{3})(-|\s)*(\d{2})(-|\s)*(\d{2})"
+    pattern = r"(\+7|8)(\s*)(\(*)(\d{3})(\)*)(\s*)" \
+              r"(\-*)(\d{3})(\s*)(\-*)(\d{2})(\s*)" \
+              r"(\-*)(\d{2})(\s*)(\(*)(доб)*(\.*)(\s*)(\d+)*(\)*)"
     for people in contacts_list:
-        people[5] = re.sub(pattern, r"+7(\2)\4-\6-\8", people[5])
+        people[5] = re.sub(pattern, r"+7(\4)\8-\11-\14\15\17\18\19\20", people[5])
     return contacts_list
 
 def delete_doubles():
@@ -52,8 +54,7 @@ if __name__ == '__main__':
     contacts_list = read_file()
     structure_names()
     subs_phones()
-    new_list = delete_doubles()
-    write_file()
+    pprint(contacts_list)
 
 
 
